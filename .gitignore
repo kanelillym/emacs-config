@@ -1,0 +1,12 @@
+/org-roam.db
+/elpa/
+/init.el~
+/bookmarks~
+/bookmarks
+/org-persist/
+/projectile-bookmarks.eld
+/quelpa/
+/auto-save-list/
+/.org-id-locations
+/server/
+/transient/
