@@ -414,6 +414,8 @@
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n a a" . org-roam-alias-add)
 	 ("C-c n a r" . org-roam-alias-remove)
+	 ("C-c n t a" . org-roam-tag-add)
+	 ("C-c n t r" . org-roam-tag-remove)
 	 :map org-mode-map
 	 ("C-M-i" . completion-at-point))
   :config
