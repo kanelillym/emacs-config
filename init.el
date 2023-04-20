@@ -1,6 +1,6 @@
 (setq default-directory "C:/Users/lkane/Documents/git")
 
-(setq org-agenda-files '("~/../../Documents/org"))
+(setq org-agenda-files '("~/../../Documents/org" "~/../../Documents/org/roam"))
 
 ;; You will most likely need to adjust this font size for your system!
 (defvar runemacs/default-font-size 125)
