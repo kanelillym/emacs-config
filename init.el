@@ -337,36 +337,32 @@
   (setq lk/org-file-path "~/../../Documents/org/")
 
   (setq org-capture-templates
-	'(("t" "tasks / Projects")
-	  ("tt" "task" entry (file+olp "~/../org/Tasks.org" "Inbox")
+	`(("t" "tasks / Projects")
+	  ("tt" "task" entry (file+olp ,(concat lk/org-file-path "Tasks.org") "Inbox")
 	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
-	  ("ts" "clocked Entry Subtask" entry (clock)
+	  ("ts" "clocked Entry Subtask" entry (clock) ; This has no file target as it is intended to insert at the active point in an org file.
 	   "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
-	  ("tc" "chore" entry (file "~/../org/Chores.org")
+	  ("tc" "chore" entry (file ,(concat lk/org-file-path "Chores.org"))
 	   "* TODO %?\n:PROPERTIES:\n:STYLE: habit\n:END:\n %i" :empty-lines 1)
-	  ("th" "Homework" entry (file "~/../Homework.org")
+	  ("th" "Homework" entry (file ,(concat lk/org-file-path "Homework.org"))
 	   "* TODO %? :homework:\n%U" :empty-lines 1)
 
-	  ("e" "Events" entry (file "~/../org/Events.org") "* %? :appointment:\n")
+	  ("e" "Events" entry (file ,(concat lk/org-file-path "Events.org")) "* %? :appointment:\n")
 
 	  ("j" "Journal Entries")
 	  ("jj" "Journal" entry
-	   (file+olp+datetree "~/../org/Journal.org")
+	   (file+olp+datetree ,(concat lk/org-file-path "Journal.org"))
 	   "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1)
 	  ("jm" "Meeting" entry
-	   (file+olp+datetree "~/../org/Journal.org")
-	   "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+	   (file+olp+datetree ,(concat lk/org-file-path "Journal.org"))
+	   "\n* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
 	   :clock-in :clock-resume
 	   :empty-lines 1)
 
-	  ("w" "Workflows")
-	  ("we" "Checking Email" entry (file+olp+datetree ,(dw/get-todays-journal-file-name))
-	   "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
 	  ("m" "Metrics Capture")
-	  ("mw" "Weight" table-line (file+headline "~/../org/Metrics.org" "Weight")
+	  ("mw" "Weight" table-line (file+headline ,(concat lk/org-file-path "Metrics.org") "Weight")
 	   "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
 
   ;; Org habit display config
