@@ -1,7 +1,6 @@
 (setq default-directory "C:/Users/lkane/Documents/git")
 
-(setq org-agenda-files
-      '("~/../../Documents/org"))
+(setq org-agenda-files '("~/../../Documents/org"))
 
 ;; You will most likely need to adjust this font size for your system!
 (defvar runemacs/default-font-size 125)
@@ -426,7 +425,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files nil)
  '(package-selected-packages
    '(org-roam-bibtex org-roam-ui python-black sqlite sqlite3 emacsql-sqlite org-roam emacsql org-pomodoro pytest python-pytest eslint-fix typescript-mode quelpa-use-package visual-fill-column org-bullets forge magit counsel-projectile projectile hydra evil-collection evil general helpful counsel ivy-rich which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy use-package)))
 (custom-set-faces
