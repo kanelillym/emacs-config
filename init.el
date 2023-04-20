@@ -334,6 +334,8 @@
   ;; Save org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
+  (setq lk/org-file-path "~/../../Documents/org/")
+
   (setq org-capture-templates
 	'(("t" "tasks / Projects")
 	  ("tt" "task" entry (file+olp "~/../org/Tasks.org" "Inbox")
