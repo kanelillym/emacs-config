@@ -424,13 +424,23 @@
   :config
   (org-roam-setup))
 
+;; ledger-mode
+(use-package ledger-mode
+  :ensure t
+  :init
+  (setq ledger-clear-whole-transactions 1)
+  :config
+  (add-to-list 'evil-emacs-state-modes 'ledger-report-mode) ; remove evil keybinds in ledger reports, i think?
+  :mode "\\.dat\\'")
+(use-package company-ledger) ; ledger autocompleter
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(org-roam-bibtex org-roam-ui python-black sqlite sqlite3 emacsql-sqlite org-roam emacsql org-pomodoro pytest python-pytest eslint-fix typescript-mode quelpa-use-package visual-fill-column org-bullets forge magit counsel-projectile projectile hydra evil-collection evil general helpful counsel ivy-rich which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy use-package)))
+   '(company-ledger ledger-mode org-roam-bibtex org-roam-ui python-black sqlite sqlite3 emacsql-sqlite org-roam emacsql org-pomodoro pytest python-pytest eslint-fix typescript-mode quelpa-use-package visual-fill-column org-bullets forge magit counsel-projectile projectile hydra evil-collection evil general helpful counsel ivy-rich which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
