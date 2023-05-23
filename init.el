@@ -4,7 +4,7 @@
 (setq org-agenda-files '("~/../../Documents/org" "~/../../Documents/org/roam"))
 
 ;; You will most likely need to adjust this font size for your system!
-(defvar runemacs/default-font-size 125)
+(defvar runemacs/default-font-size 140)
 
 (setq inhibit-startup-message t)
 
