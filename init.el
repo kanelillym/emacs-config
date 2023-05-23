@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
-(setq default-directory "C:/Users/lkane/Documents/git")
+(setq default-directory "C:/Users/kanel/Documents/")
 
 (setq org-agenda-files '("~/../../Documents/org" "~/../../Documents/org/roam"))
 
