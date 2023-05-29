@@ -463,7 +463,7 @@
 
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
-  (setq org-agenda-files (my/org-roam-list-notes-by-tag "Project")))
+  (setq org-agenda-files (append (my/org-roam-list-notes-by-tag "Inbox") (my/org-roam-list-notes-by-tag "Project"))))
 
 ;; Build the agenda list the first time for the session
 (my/org-roam-refresh-agenda-list)
@@ -498,8 +498,11 @@ capture was not aborted."
 (defun my/org-roam-capture-inbox ()
   (interactive)
   (org-roam-capture- :node (org-roam-node-create)
-                     :templates '(("i" "inbox" plain "* %?"
-                                  :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
+                     :templates '(("i" "default" plain "* %?"
+                                   :if-new (file+head "Inbox.org" "#+title: Inbox\n"))
+				  ("h" "inbox habit" plain "* TODO %?\n:PROPERTIES:\n:STYLE: habit\n:END:"
+				   :if-new (file+head "Inbox.org" "#+title: Inbox\n"))
+				  )))
 
 (defun my/org-roam-capture-task ()
   (interactive)
