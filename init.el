@@ -550,3 +550,5 @@ capture was not aborted."
  )
 
 (org-agenda-list)
+(org-agenda-day-view)
+(delete-other-windows)
