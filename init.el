@@ -408,7 +408,7 @@
     :unnarrowed t)
    ("b" "bibliography" plain
     "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n%?"
-    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
+    :if-new (file+head "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
     :unnarrowed t)))
 (setq org-roam-dailies-capture-templates
  '(("d" "default" entry "* %<%H:%M>: %?"
