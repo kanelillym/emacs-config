@@ -406,6 +406,10 @@
     "* Goals\n** %?\n* Tasks\n** TODO Add initial tasks\n* Dates"
     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project\n")
     :unnarrowed t)
+   ("a" "area" plain
+    "* Goals\n** %?\n* Tasks\n** TODO Add initial tasks\n* Dates"
+    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area\n")
+    :unnarrowed t)
    ("b" "bibliography" plain
     "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n%?"
     :if-new (file+head "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
@@ -427,12 +431,13 @@
          ("C-c n i" . org-roam-node-insert)
          ("C-c n I" . org-roam-node-insert-immediate)
          ("C-c n p" . my/org-roam-find-project)
+	 ("C-c n a" . my/org-roam-find-area)
          ("C-c n t" . my/org-roam-capture-task)
          ("C-c n b" . my/org-roam-capture-inbox)
 	 ("C-c n T a" . org-roam-tag-add)
 	 ("C-c n T r" . org-roam-tag-remove)
-	 ("C-c n a a" . org-roam-alias-add)
-	 ("C-c n a r" . org-roam-alias-remove)
+	 ("C-c n A a" . org-roam-alias-add)
+	 ("C-c n A r" . org-roam-alias-remove)
          :map org-mode-map
          ("C-M-i" . completion-at-point)
          :map org-roam-dailies-map
@@ -451,6 +456,12 @@
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
+(defun my/org-roam-filter-by-tags (taglist)
+  (lambda (node)
+    (setq check nil)
+    (dolist (tag taglist) (if (member tag (org-roam-node-tags node)) (setq check t) nil))
+    check))
+
 (defun my/org-roam-filter-by-tag (tag-name)
   (lambda (node)
     (member tag-name (org-roam-node-tags node))))
@@ -463,7 +474,7 @@
 
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
-  (setq org-agenda-files (append (my/org-roam-list-notes-by-tag "Inbox") (my/org-roam-list-notes-by-tag "Project"))))
+  (setq org-agenda-files (append (my/org-roam-list-notes-by-tag "Area") (my/org-roam-list-notes-by-tag "Inbox") (my/org-roam-list-notes-by-tag "Project"))))
 
 ;; Build the agenda list the first time for the session
 (my/org-roam-refresh-agenda-list)
@@ -495,6 +506,22 @@ capture was not aborted."
      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
       :unnarrowed t))))
 
+(defun my/org-roam-find-area ()
+  (interactive)
+  ;; Add the Area file to the agenda after capture is finished
+  (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+  ;; Select an Area file to open, creating it if necessary
+  (org-roam-node-find
+   nil
+   nil
+   (my/org-roam-filter-by-tag "Area")
+   nil
+   :templates
+   '(("a" "area" plain "* Goals\n%?\n* Tasks\n** TODO Add initial tasks\n* Dates\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")
+      :unnarrowed t))))
+
 (defun my/org-roam-capture-inbox ()
   (interactive)
   (org-roam-capture- :node (org-roam-node-create)
@@ -516,7 +543,11 @@ capture was not aborted."
                      :templates '(("p" "project" plain "** TODO %?"
                                    :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
                                                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
-                                                          ("Tasks"))))))
+                                                          ("Tasks")))
+				  ("a" "area" plain "** TODO %?"
+				   :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+							  "#+title: #{title}\n#+category: ${title}\n#+filetags: Area"
+							  ("Tasks"))))))
 
 ;; ledger-mode
 (use-package ledger-mode
