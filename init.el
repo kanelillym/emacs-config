@@ -430,7 +430,7 @@
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n I" . org-roam-node-insert-immediate)
-         ("C-c n p" . my/org-roam-find-project)
+         ("C-c n p" . my/org-roam-find-active-project)
 	 ("C-c n a" . my/org-roam-find-area)
          ("C-c n t" . my/org-roam-capture-task)
          ("C-c n b" . my/org-roam-capture-inbox)
@@ -499,7 +499,20 @@ capture was not aborted."
     (with-current-buffer (org-capture-get :buffer)
       (add-to-list 'org-agenda-files (buffer-file-name)))))
 
-(defun my/org-roam-find-project ()
+(defun my/org-roam-find-active-project ()
+  (interactive)
+  (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+  (org-roam-node-find
+   nil
+   nil
+   (my/org-roam-filter-by-tag-exclude-archive "Project")
+   nil
+   :templates
+   '(("p" "project" plain "* Goals\n%?\n* Tasks\n* TODO Add initial tasks\n* Dates\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
+      :unnarrowed t))))
+
+(defun my/org-roam-find-all-projects ()
   (interactive)
   ;; Add the project file to the agenda after capture is finished
   (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
