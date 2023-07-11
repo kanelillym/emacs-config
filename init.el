@@ -505,7 +505,7 @@ capture was not aborted."
   (org-roam-node-find
    nil
    nil
-   (my/org-roam-filter-by-tag-exclude-archive "Project")
+   (my/org-roam-filter-by-tags-exclude-archive '("Project"))
    nil
    :templates
    '(("p" "project" plain "* Goals\n%?\n* Tasks\n** TODO Add initial tasks\n* Dates\n"
