@@ -508,7 +508,7 @@ capture was not aborted."
    (my/org-roam-filter-by-tag-exclude-archive "Project")
    nil
    :templates
-   '(("p" "project" plain "* Goals\n%?\n* Tasks\n* TODO Add initial tasks\n* Dates\n"
+   '(("p" "project" plain "* Goals\n%?\n* Tasks\n** TODO Add initial tasks\n* Dates\n"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
       :unnarrowed t))))
 
