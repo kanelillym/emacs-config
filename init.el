@@ -472,6 +472,15 @@
            (my/org-roam-filter-by-tag tag-name)
            (org-roam-node-list))))
 
+(defun my/org-roam-filter-by-tags-exclude-archive (taglist)
+  (lambda (node)
+    (setq check nil)
+    (dolist (tag taglist)
+      (if (and (member tag (org-roam-node-tags node)) (not (member "Archive" (org-roam-node-tags node))))
+	  (setq check t)
+	nil))
+    check))
+
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
   (setq org-agenda-files (append (my/org-roam-list-notes-by-tag "Area") (my/org-roam-list-notes-by-tag "Inbox") (my/org-roam-list-notes-by-tag "Project"))))
