@@ -496,8 +496,7 @@ capture was not aborted."
 
   ;; Add project file to the agenda list if the capture was confirmed
   (unless org-note-abort
-    (with-current-buffer (org-capture-get :buffer)
-      (add-to-list 'org-agenda-files (buffer-file-name)))))
+    (my/org-roam-refresh-agenda-list)))
 
 (defun my/org-roam-find-active-project ()
   (interactive)
