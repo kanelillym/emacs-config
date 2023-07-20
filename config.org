@@ -411,8 +411,6 @@ Before actually configuring org, create a few helper functions that can be calle
   ;; Save org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-  (setq lk/org-file-path "~/../../Documents/org/")
-
   ;; Scheduled TODOs with STYLE: HABIT will show a history chart in the agenda
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
@@ -426,6 +424,18 @@ Before actually configuring org, create a few helper functions that can be calle
   (efs/org-font-setup))
 
 #+end_src
+
+** Org file folder path
+
+This is machine specific.
+
+#+begin_src emacs-lisp
+
+  (setq lk/org-file-path "~/../../Documents/org/")
+
+#+end_src
+
+*** TODO Set up a block for handling machine specific config
 
 ** Pretty Bullets
 

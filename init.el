@@ -285,8 +285,6 @@
 ;; Save org buffers after refiling
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-(setq lk/org-file-path "~/../../Documents/org/")
-
 ;; Scheduled TODOs with STYLE: HABIT will show a history chart in the agenda
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
@@ -298,6 +296,8 @@
 (require 'org-tempo)
 
 (efs/org-font-setup))
+
+(setq lk/org-file-path "~/../../Documents/org/")
 
 (use-package org-bullets
 :after org
