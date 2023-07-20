@@ -1,7 +1,5 @@
 /org-roam.db
 /elpa/
-/init.el~
-/bookmarks~
 /bookmarks
 /org-persist/
 /projectile-bookmarks.eld
@@ -10,3 +8,4 @@
 /.org-id-locations
 /server/
 /transient/
+/*~
