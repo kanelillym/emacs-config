@@ -19,8 +19,6 @@
 
 (setq default-directory "C:/Users/lkane/Documents/git")
 
-(setq org-agenda-files '("~/../../Documents/org" "~/../../Documents/org/roam"))
-
 ;; Don't display the start page
 (setq inhibit-startup-message t)
 ;; Disable visible scrollbar

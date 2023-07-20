@@ -40,8 +40,6 @@ Who knows what it does! Not me! But something in org roam depends on this.
 
   (setq default-directory "C:/Users/lkane/Documents/git")
 
-  (setq org-agenda-files '("~/../../Documents/org" "~/../../Documents/org/roam"))
-
 #+end_src
 
 * UI Configuration
