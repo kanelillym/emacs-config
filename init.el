@@ -179,8 +179,8 @@
   ("C-c p" . projectile-command-map)
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p default-directory)
-    (setq projectile-project-search-path '(default-directory))
+  (when (file-directory-p "~/../../Documents/git")
+    (setq projectile-project-search-path '("~/../../Documents/git"))
     (setq projectile-switch-project-action #'projectile-dired)))
 
 (use-package counsel-projectile
