@@ -293,10 +293,9 @@
 (setq org-habit-preceding-days 15)
 (setq org-habit-following-days 5)
 
-;; Org Tempo helps with word expansion eg for making source blocks quickly
-(require 'org-tempo)
-
 (efs/org-font-setup))
+
+(require 'org-tempo)
 
 (use-package org-bullets
 :after org
