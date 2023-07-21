@@ -17,7 +17,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(setq default-directory "C:/Users/lkane/Documents/git")
+(setq default-directory "~/../../Documents/git")
 (setq lk/org-file-path "~/../../Documents/org/")
 
 ;; Don't display the start page

@@ -44,7 +44,7 @@ Who knows what it does! Not me! But something in org roam depends on this.
 
 #+begin_src emacs-lisp
 
-  (setq default-directory "C:/Users/lkane/Documents/git")
+  (setq default-directory "~/../../Documents/git")
   (setq lk/org-file-path "~/../../Documents/org/")
 
 #+end_src
