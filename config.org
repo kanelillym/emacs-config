@@ -1,5 +1,11 @@
-#+title Emacs Configuration
+#+title: Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
+
+* Read Me!
+
+This file is the readme, but it also /is/ the code. Neat! =org-babel= is used to 'tangle' the code blocks in this file and combine their contents to create the =init.el= file. Ain't that fancy :)
+
+This is my current configuration for emacs, which I use for personal knowledge management and code development. There are a few places where I link into my knowledge graph, but it seems like github is made well enough to drop file links to files that are not in the repo so those links just don't show up. That this file is viewable through github is a neat bonus, but I anticipate always reading and tweaking it locally so I'm not going to make any special effort to fix or even indicate those links.
 
 * Set lexical binding
 
@@ -39,8 +45,11 @@ Who knows what it does! Not me! But something in org roam depends on this.
 #+begin_src emacs-lisp
 
   (setq default-directory "C:/Users/lkane/Documents/git")
+  (setq lk/org-file-path "~/../../Documents/org/")
 
 #+end_src
+
+** TODO Set up a block for handling machine specific config
 
 * UI Configuration
 
@@ -150,7 +159,7 @@ Improve the help pages for variables and functions.
 
 * Autocompletion and Search Framework
 
-I use ivy for search because David Wilson uses it in Emacs from Scratch. It's fine, I don't really know any advantages or disadvantages to different completion frameworks. But I live and die by =counsel-switch-buffer= so I can never change lmao
+I use ivy for search because [[id:21b9b919-ba2e-4f62-9740-41bb235d40c6][David Wilson of System Crafters]] uses it in the "Emacs from Scratch" tutorial series. It's fine, I don't really know any advantages or disadvantages to different completion frameworks. But I live and die by =counsel-switch-buffer= and counsel is built on top of ivy so I can never change lmao
 
 #+begin_src emacs-lisp
 
@@ -229,6 +238,9 @@ Evil collection is a compatibility library for evil, to make sure things like ma
 
 * Keybindings
 
+All the keybindings which aren't set in package definitions and aren't map dependent.
+I really ought to use hydra for more (or less), but I haven't found a solid use case yet.
+
 #+begin_src emacs-lisp
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -263,6 +275,8 @@ Evil collection is a compatibility library for evil, to make sure things like ma
 
 ** Magit
 
+The best git tool I've ever used.
+
 #+begin_src emacs-lisp
 
   (use-package magit
@@ -285,8 +299,8 @@ Evil collection is a compatibility library for evil, to make sure things like ma
     ("C-c p" . projectile-command-map)
     :init
     ;; NOTE: Set this to the folder where you keep your Git repos!
-    (when (file-directory-p "~/../../../git")
-      (setq projectile-project-search-path '("~/../../../git"))
+    (when (file-directory-p default-directory)
+      (setq projectile-project-search-path '(default-directory))
       (setq projectile-switch-project-action #'projectile-dired)))
 
   (use-package counsel-projectile
@@ -300,7 +314,7 @@ Org is the bread and butter, the lifeblood of my emacs workflow. This configurat
 
 ** Setup
 
-Before actually configuring org, create a few helper functions that can be called later.
+Before actually configuring org, create helper and prettifier functions that can be called later.
 ... I don't remember where the =efs/= prefix came from. Probably Daviwil again.
 
 #+begin_src emacs-lisp
@@ -424,18 +438,6 @@ Before actually configuring org, create a few helper functions that can be calle
   (efs/org-font-setup))
 
 #+end_src
-
-** Org file folder path
-
-This is machine specific.
-
-#+begin_src emacs-lisp
-
-  (setq lk/org-file-path "~/../../Documents/org/")
-
-#+end_src
-
-*** TODO Set up a block for handling machine specific config
 
 ** Pretty Bullets
 
