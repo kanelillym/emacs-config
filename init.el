@@ -18,6 +18,7 @@
 (setq use-package-always-ensure t)
 
 (setq default-directory "C:/Users/lkane/Documents/git")
+(setq lk/org-file-path "~/../../Documents/org/")
 
 ;; Don't display the start page
 (setq inhibit-startup-message t)
@@ -178,8 +179,8 @@
   ("C-c p" . projectile-command-map)
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/../../../git")
-    (setq projectile-project-search-path '("~/../../../git"))
+  (when (file-directory-p default-directory)
+    (setq projectile-project-search-path '(default-directory))
     (setq projectile-switch-project-action #'projectile-dired)))
 
 (use-package counsel-projectile
@@ -296,8 +297,6 @@
 (require 'org-tempo)
 
 (efs/org-font-setup))
-
-(setq lk/org-file-path "~/../../Documents/org/")
 
 (use-package org-bullets
 :after org
