@@ -800,9 +800,39 @@ Use the =ement= package by alphapapa for matrix chat. I previously had trouble g
 
 #+end_src
 
+** Gemini
+
+Gemini is a lightweight alternative to WWW Hypertext, with its own protocol and clients.
+
+Elpher is a browser for Gemini and Gopher protocol pages.
+
+#+begin_src emacs-lisp
+
+  (use-package elpher)
+
+#+end_src
+
+ox-gemini is an org to gemini publishing tool, similar to =org-publish= for HTML.
+
+#+begin_src emacs-lisp
+
+  (use-package ox-gemini)
+
+#+end_src
+
+I'm not sure if I want to include a direct gemini editing mode if I'm going to be mostly publishing out of org. Just in case, I call it out here.
+
+#+begin_src emacs-lisp
+
+  ;; (use-package gemini-mode)
+
+#+end_src
+
 * Ledger
 
 Ledger is a dual-book accounting tool in the CLI. It's usable on its own with manually editing text files, but this package helps streamline it and invoke the CLI tool through emacs.
+
+I'm not actually currently using ledger, and I'm considering removing this section. I looked at it initially as a replacement for [[http://youneedabudget.com][YNAB]], but the difficulty of implementing a single system on my own which can track what money I have, where it is, *and* what I plan to use it for put me off it. Not solving that problem has-so far-been worth the subscription price.
 
 #+begin_src emacs-lisp
 

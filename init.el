@@ -555,6 +555,12 @@
 ;; (use-package quelpa-use-package)
 ;; (quelpa '(ement :repo "alphapapa/ement.el" :fetcher github))
 
+(use-package elpher)
+
+(use-package ox-gemini)
+
+;; (use-package gemini-mode)
+
 (use-package ledger-mode
   :ensure t
   :init
