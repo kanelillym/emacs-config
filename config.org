@@ -444,6 +444,16 @@ Org Tempo helps with word expansion, e.g. using =<el `<TAB>'= as a shortcut for 
 
 #+end_src
 
+The =org-structure-template-alist= determines what can be auto expanded as a code block. Each expanded block begins with =#+begin_= and continues with the second string in the relevant definition.
+
+#+begin_src emacs-lisp
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+
+#+end_src
+
 ** Pretty Bullets
 
 #+begin_src emacs-lisp
