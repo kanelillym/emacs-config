@@ -347,6 +347,7 @@
          ("C-c n r" . my/org-roam-find-resource)
          ("C-c n t" . my/org-roam-capture-task)
          ("C-c n b" . my/org-roam-capture-inbox)
+         ("C-c n R" . org-roam-node-random)
          ("C-c n T a" . org-roam-tag-add)
          ("C-c n T r" . org-roam-tag-remove)
          ("C-c n A a" . org-roam-alias-add)

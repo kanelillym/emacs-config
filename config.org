@@ -537,6 +537,7 @@ A [[id:1233da2d-22b0-4fbc-9435-87568b813666][Personal Knowledge Management]] too
            ("C-c n r" . my/org-roam-find-resource)
            ("C-c n t" . my/org-roam-capture-task)
            ("C-c n b" . my/org-roam-capture-inbox)
+           ("C-c n R" . org-roam-node-random)
            ("C-c n T a" . org-roam-tag-add)
            ("C-c n T r" . org-roam-tag-remove)
            ("C-c n A a" . org-roam-alias-add)
