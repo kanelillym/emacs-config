@@ -369,13 +369,13 @@
          :unnarrowed t)
 
         ("p" "project" plain
-         "* Goals\n** %?\n* Tasks\n** TODO Add initial tasks\n* Dates"
+         "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project\n")
          :unnarrowed t)
 
         ("a" "area" plain
-         "* Goals\n** %?\n* Tasks\n** TODO Add initial tasks\n* Dates"
+         "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area\n")
          :unnarrowed t)
@@ -459,7 +459,7 @@
    nil
    ;; If the selected node does not exist, override capture templates so that only the Project template is available
    :templates '(("p" "project" plain
-                 "* Goals\n%?\n* Tasks\n** TODO Add initial tasks\n* Dates\n"
+                 "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -478,7 +478,7 @@
    (my/org-roam-filter-by-tag "Project")
    nil
    :templates '(("p" "project" plain
-                 "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+                 "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n"
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -510,7 +510,7 @@
    (my/org-roam-filter-by-tag "Area")
    nil
    :templates '(("a" "area" plain
-                 "* Goals\n%?\n* Tasks\n** TODO Add initial tasks\n* Dates\n"
+                 "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")
