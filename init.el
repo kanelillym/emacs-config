@@ -383,7 +383,7 @@
          :unnarrowed t)
 
         ("b" "bibliography" plain
-         "\n* Source\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n%?"
+         "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n"
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
          :unnarrowed t)))
