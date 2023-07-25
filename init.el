@@ -344,6 +344,7 @@
          ("C-c n I" . org-roam-node-insert-immediate)
          ("C-c n p" . my/org-roam-find-active-project)
          ("C-c n a" . my/org-roam-find-area)
+         ("C-c n r" . my/org-roam-find-resource)
          ("C-c n t" . my/org-roam-capture-task)
          ("C-c n b" . my/org-roam-capture-inbox)
          ("C-c n T a" . org-roam-tag-add)
@@ -396,7 +397,9 @@
   "Create a lambda which returns t iff any string in TAGLIST is a tag on a provided org-roam node."
   (lambda (node)
     (setq check nil)
-    (dolist (tag taglist) (if (member tag (org-roam-node-tags node)) (setq check t) nil))
+    (dolist (tag taglist)
+      (if (member tag (org-roam-node-tags node))
+          (setq check t)))
     check))
 
 (defun my/org-roam-filter-by-tag (tag-name)
@@ -417,8 +420,15 @@
     (setq check nil)
     (dolist (tag taglist)
       (if (and (member tag (org-roam-node-tags node)) (not (member "Archive" (org-roam-node-tags node))))
-          (setq check t)
-        nil))
+          (setq check t)))
+    check))
+
+(defun my/org-roam-filter-by-tags-exclusive (taglist)
+  "Create a filtering lambda which returns nil iff the provided roam node is tagged with any member of taglist, and returns t otherwise"
+  (lambda (node)
+    (setq check t)
+    (dolist (tag taglist)
+      (if (member tag (org-roam-node-tags node)) (setq check nil)))
     check))
 
 (defun org-roam-node-insert-immediate (arg &rest args)
@@ -505,8 +515,7 @@
 
   ;; Select an Area file to open, creating it if necessary
   (org-roam-node-find
-   nil
-   nil
+   nil nil
    (my/org-roam-filter-by-tag "Area")
    nil
    :templates '(("a" "area" plain
@@ -515,6 +524,14 @@
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")
                  :unnarrowed t))))
+
+(defun my/org-roam-find-resource ()
+  "Find an org node by title which is not tagged with \"Project\", \"Area\", or \"Inbox\"."
+  (interactive)
+  (org-roam-node-find
+   nil nil
+   (my/org-roam-filter-by-tags-exclusive '("Project" "Area" "Inbox"))
+   nil)) ;; Don't override default templates if creating a new file
 
 (defun my/org-roam-capture-inbox ()
   "Capture a bullet into the Inbox.org file."
