@@ -544,11 +544,6 @@
                      :templates '(("i" "default" plain
                                    "* %?"
                                    :if-new (file+head
-                                            "Inbox.org" "#+title: Inbox\n"))
-
-                                  ("h" "inbox habit" plain
-                                   "* TODO %?\n:PROPERTIES:\n:STYLE: habit\n:END:"
-                                   :if-new (file+head
                                             "Inbox.org" "#+title: Inbox\n")))))
 
 (defun my/org-roam-capture-task ()
