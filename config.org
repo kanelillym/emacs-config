@@ -45,7 +45,7 @@ Who knows what it does! Not me! But something in org roam depends on this.
 #+begin_src emacs-lisp
 
   (setq default-directory "~/../../Documents/git")
-  (setq lk/org-file-path "~/../../Documents/org/")
+  (setq my/org-file-path "~/../../Documents/org/")
 
 #+end_src
 
@@ -253,7 +253,7 @@ I really ought to use hydra for more (or less), but I haven't found a solid use 
 
   (use-package general
     :config
-    (general-create-definer rune/leader-keys
+    (general-create-definer my/leader-keys
       :keymaps '(normal insert visual emacs)
       :prefix "SPC"
       :global-prefix "C-SPC"))
@@ -266,7 +266,7 @@ I really ought to use hydra for more (or less), but I haven't found a solid use 
     ("k" text-scale-decrease "out")
     ("f" nil "finished" :exit t))
 
-  (rune/leader-keys
+  (my/leader-keys
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
     "ts" '(hydra-text-scale/body :which-key "scale text"))
@@ -317,18 +317,17 @@ Org is the bread and butter, the lifeblood of my emacs workflow. This configurat
 ** Setup
 
 Before actually configuring org, create helper and prettifier functions that can be called later.
-... I don't remember where the =efs/= prefix came from. Probably Daviwil again.
 
 #+begin_src emacs-lisp
 
-  (defun efs/org-mode-setup ()
+  (defun my/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
     (visual-line-mode 1)
     (auto-fill-mode 0)
     (setq evil-auto-indent nil))
 
-  (defun efs/org-font-setup ()
+  (defun my/org-font-setup ()
     ;; Replace list hyphen with dot
     (font-lock-add-keywords 'org-mode
                             '(("^ *\\([-]\\) "
@@ -361,7 +360,7 @@ Before actually configuring org, create helper and prettifier functions that can
 #+begin_src emacs-lisp
 
   (use-package org
-  :hook (org-mode . efs/org-mode-setup)
+  :hook (org-mode . my/org-mode-setup)
   :bind (("C-c a" . org-agenda))
 
   :config
@@ -434,7 +433,7 @@ Before actually configuring org, create helper and prettifier functions that can
   (setq org-habit-preceding-days 15)
   (setq org-habit-following-days 5)
 
-  (efs/org-font-setup))
+  (my/org-font-setup))
 
 #+end_src
 
@@ -472,13 +471,13 @@ The =org-structure-template-alist= determines what can be auto expanded as a cod
 
 #+begin_src emacs-lisp
 
-  (defun efs/org-mode-visual-fill ()
+  (defun my/org-mode-visual-fill ()
     (setq visual-fill-column-width 100
           visual-fill-column-center-text t)
     (visual-fill-column-mode 1))
 
   (use-package visual-fill-column
-    :hook (org-mode . efs/org-mode-visual-fill))
+    :hook (org-mode . my/org-mode-visual-fill))
 
 #+end_src
 
@@ -502,13 +501,13 @@ Files which are intended to be narrated elisp config files can be specified here
 
 #+begin_src emacs-lisp
 
-  (defun efs/org-babel-tangle-config ()
+  (defun my/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
                       (expand-file-name "~/.emacs.d/config.org")) ; This file
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-config)))
 
 #+end_src
 
@@ -526,7 +525,7 @@ A [[id:1233da2d-22b0-4fbc-9435-87568b813666][Personal Knowledge Management]] too
     :init
     (setq org-roam-v2-ack t)
     :custom
-    (org-roam-directory (concat lk/org-file-path "roam"))
+    (org-roam-directory (concat my/org-file-path "roam"))
     (org-roam-completion-everywhere t)
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
@@ -604,7 +603,7 @@ I frequently am overriding the default capture templates, but usually I only use
 #+begin_src emacs-lisp
 
   (setq my/org-roam-para-template "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n")
-  (setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n"
+  (setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n")
 
 #+end_src
 

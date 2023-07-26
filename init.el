@@ -18,7 +18,7 @@
 (setq use-package-always-ensure t)
 
 (setq default-directory "~/../../Documents/git")
-(setq lk/org-file-path "~/../../Documents/org/")
+(setq my/org-file-path "~/../../Documents/org/")
 
 ;; Don't display the start page
 (setq inhibit-startup-message t)
@@ -149,7 +149,7 @@
 
 (use-package general
   :config
-  (general-create-definer rune/leader-keys
+  (general-create-definer my/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC"))
@@ -162,7 +162,7 @@
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
-(rune/leader-keys
+(my/leader-keys
   "t"  '(:ignore t :which-key "toggles")
   "tt" '(counsel-load-theme :which-key "choose theme")
   "ts" '(hydra-text-scale/body :which-key "scale text"))
@@ -188,14 +188,14 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
-(defun efs/org-mode-setup ()
+(defun my/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
   (auto-fill-mode 0)
   (setq evil-auto-indent nil))
 
-(defun efs/org-font-setup ()
+(defun my/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
@@ -222,7 +222,7 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
-:hook (org-mode . efs/org-mode-setup)
+:hook (org-mode . my/org-mode-setup)
 :bind (("C-c a" . org-agenda))
 
 :config
@@ -295,7 +295,7 @@
 (setq org-habit-preceding-days 15)
 (setq org-habit-following-days 5)
 
-(efs/org-font-setup))
+(my/org-font-setup))
 
 (require 'org-tempo)
 
@@ -309,26 +309,26 @@
 :custom
 (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun efs/org-mode-visual-fill ()
+(defun my/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
-  :hook (org-mode . efs/org-mode-visual-fill))
+  :hook (org-mode . my/org-mode-visual-fill))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((emacs-lisp . t)
                              (python . t)))
 (setq org-confirm-babel-evaluate nil)
 
-(defun efs/org-babel-tangle-config ()
+(defun my/org-babel-tangle-config ()
 (when (string-equal (buffer-file-name)
                     (expand-file-name "~/.emacs.d/config.org")) ; This file
   (let ((org-confirm-babel-evaluate nil))
     (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-config)))
 
 (use-package org-roam
   :ensure t
@@ -336,7 +336,7 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (concat lk/org-file-path "roam"))
+  (org-roam-directory (concat my/org-file-path "roam"))
   (org-roam-completion-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
@@ -396,7 +396,7 @@
                   "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
 
 (setq my/org-roam-para-template "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n")
-(setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n"
+(setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n")
 
 (defun my/org-roam-filter-by-tags (taglist)
   "Create a lambda which returns t iff any string in TAGLIST is a tag on a provided org-roam node."
