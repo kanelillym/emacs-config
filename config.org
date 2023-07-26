@@ -86,10 +86,10 @@ Who knows what it does! Not me! But something in org roam depends on this.
 
 #+begin_src emacs-lisp
 
-  (defvar runemacs/default-font-size 140)
+  (defvar my/default-font-size 140)
 
   ;; By default, use Fira Code Retina font.
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height runemacs/default-font-size)
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height my/default-font-size)
 
   ;; For monospace, use Fira Code Retina font.
   (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 125)

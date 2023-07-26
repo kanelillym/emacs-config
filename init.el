@@ -45,10 +45,10 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(defvar runemacs/default-font-size 140)
+(defvar my/default-font-size 140)
 
 ;; By default, use Fira Code Retina font.
-(set-face-attribute 'default nil :font "Fira Code Retina" :height runemacs/default-font-size)
+(set-face-attribute 'default nil :font "Fira Code Retina" :height my/default-font-size)
 
 ;; For monospace, use Fira Code Retina font.
 (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 125)
@@ -199,7 +199,7 @@
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) " "))))))
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -226,7 +226,7 @@
 :bind (("C-c a" . org-agenda))
 
 :config
-(setq org-ellipsis " ▾")
+(setq org-ellipsis "  ")
 
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
@@ -307,7 +307,7 @@
 :after org
 :hook (org-mode . org-bullets-mode)
 :custom
-(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+(org-bullets-bullet-list '(" " " " " " " " " " " " " ")))
 
 (defun my/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
