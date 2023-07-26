@@ -556,7 +556,7 @@
   ;; Capture the new task, creating the project file if necessary
   (org-roam-capture- :node (org-roam-node-read
                             nil
-                            (my/org-roam-filter-by-tags '("Area" "Project")))
+                            (my/org-roam-filter-by-tags-exclude-archive '("Area" "Project")))
                      :templates '(("p" "project" plain
                                    "** TODO %?"
                                    :if-new (file+head+olp
