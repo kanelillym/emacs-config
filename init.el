@@ -346,6 +346,7 @@
          ("C-c n a" . my/org-roam-find-area)
          ("C-c n r" . my/org-roam-find-resource)
          ("C-c n t" . my/org-roam-capture-task)
+         ("C-c n e" . my/org-roam-capture-event)
          ("C-c n b" . my/org-roam-capture-inbox)
          ("C-c n R" . org-roam-node-random)
          ("C-c n T a" . org-roam-tag-add)
@@ -566,8 +567,20 @@
                                    "** TODO %?"
                                    :if-new (file+head+olp
                                             "%<%Y%m%d%H%M%S>-${slug}.org"
-                                            "#+title: #{title}\n#+category: ${title}\n#+filetags: Area"
+                                            "#+title: ${title}\n#+category: ${title}\n#+filetags: Area"
                                             ("Tasks"))))))
+
+(defun my/org-roam-capture-event ()
+  (interactive)
+  (org-roam-capture- :node (org-roam-node-read
+                            nil
+                            (my/org-roam-filter-by-tags-exclude-archive '("Area" "Project")))
+                     :templates '(("e" "event" plain
+                                   "** %?\n%U\n%^T"
+                                   :if-new (file+head+olp
+                                            "%<%Y%m%d%H%M%S>-${slug}.org"
+                                            "#+title: ${title}\n#+category: ${title}"
+                                            ("Dates"))))))
 
 (use-package ement)
 ;; (use-package quelpa-use-package)
