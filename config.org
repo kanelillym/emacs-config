@@ -569,19 +569,19 @@ Because org-roam has largely replaced my normal org-capture use case, these temp
            :unnarrowed t)
 
           ("p" "project" plain
-           "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
+           my/org-roam-para-template
            :if-new (file+head
                     "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project\n")
            :unnarrowed t)
 
           ("a" "area" plain
-           "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
+           my/org-roam-para-template
            :if-new (file+head
                     "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area\n")
            :unnarrowed t)
 
           ("b" "bibliography" plain
-           "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n"
+           my/org-roam-biblio-template
            :if-new (file+head
                     "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
            :unnarrowed t)))
@@ -595,6 +595,17 @@ Because org-roam has largely replaced my normal org-capture use case, these temp
 #+end_src
 
 *** Support Functions
+
+**** Templates
+
+I frequently am overriding the default capture templates, but usually I only use this feature to restrict which templates can be used in the specialized capture functions. Here I define my templates so that I can reference them later, and any changes I make in the future will be automatically reflected in all capture functions.
+
+#+begin_src emacs-lisp
+
+  (setq my/org-roam-para-template "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n")
+  (setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n"
+
+#+end_src
 
 **** Filtering
 
@@ -694,7 +705,7 @@ Because org-roam has largely replaced my normal org-capture use case, these temp
      nil
      ;; If the selected node does not exist, override capture templates so that only the Project template is available
      :templates '(("p" "project" plain
-                   "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
+                   my/org-roam-para-template
                    :if-new (file+head
                             "%<%Y%m%d%H%M%S>-${slug}.org"
                             "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -713,7 +724,7 @@ Because org-roam has largely replaced my normal org-capture use case, these temp
      (my/org-roam-filter-by-tag "Project")
      nil
      :templates '(("p" "project" plain
-                   "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n"
+                   my/org-roam-para-template
                    :if-new (file+head
                             "%<%Y%m%d%H%M%S>-${slug}.org"
                             "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -744,7 +755,7 @@ Because org-roam has largely replaced my normal org-capture use case, these temp
      (my/org-roam-filter-by-tag "Area")
      nil
      :templates '(("a" "area" plain
-                   "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
+                   my/org-roam-para-template
                    :if-new (file+head
                             "%<%Y%m%d%H%M%S>-${slug}.org"
                             "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")

@@ -371,19 +371,19 @@
          :unnarrowed t)
 
         ("p" "project" plain
-         "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
+         my/org-roam-para-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project\n")
          :unnarrowed t)
 
         ("a" "area" plain
-         "* Goals\n** %?\n* Tasks\n** NEXT Add initial tasks\n* Dates"
+         my/org-roam-para-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area\n")
          :unnarrowed t)
 
         ("b" "bibliography" plain
-         "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n"
+         my/org-roam-biblio-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
          :unnarrowed t)))
@@ -393,6 +393,9 @@
          "* %<%H:%M>: %?"
          :if-new (file+head
                   "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+
+(setq my/org-roam-para-template "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n")
+(setq my/org-roam-biblio-template "* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?\n\n* Notes\n\n"
 
 (defun my/org-roam-filter-by-tags (taglist)
   "Create a lambda which returns t iff any string in TAGLIST is a tag on a provided org-roam node."
@@ -470,7 +473,7 @@
    nil
    ;; If the selected node does not exist, override capture templates so that only the Project template is available
    :templates '(("p" "project" plain
-                 "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
+                 my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -489,7 +492,7 @@
    (my/org-roam-filter-by-tag "Project")
    nil
    :templates '(("p" "project" plain
-                 "* Goals\n\n%?\n\n* Tasks\n\n** NEXT Add initial tasks\n\n* Dates\n\n"
+                 my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -520,7 +523,7 @@
    (my/org-roam-filter-by-tag "Area")
    nil
    :templates '(("a" "area" plain
-                 "* Goals\n%?\n* Tasks\n** NEXT Add initial tasks\n* Dates\n"
+                 my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")
