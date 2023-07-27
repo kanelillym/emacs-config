@@ -199,7 +199,7 @@
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) " "))))))
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -226,7 +226,7 @@
 :bind (("C-c a" . org-agenda))
 
 :config
-(setq org-ellipsis "  ")
+(setq org-ellipsis " ▾")
 
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
@@ -307,7 +307,7 @@
 :after org
 :hook (org-mode . org-bullets-mode)
 :custom
-(org-bullets-bullet-list '(" " " " " " " " " " " " " ")))
+(org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (defun my/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
