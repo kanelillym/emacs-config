@@ -17,8 +17,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(setq default-directory "~/../../Documents/git")
-(setq my/org-file-path "~/../../Documents/org/")
+;; Define default-directory and my/org-file-path in site-start.el
 
 ;; Don't display the start page
 (setq inhibit-startup-message t)
