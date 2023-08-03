@@ -364,26 +364,26 @@
 (org-roam-db-autosync-mode))
 
 (setq org-roam-capture-templates
-      '(("d" "default" plain
+      `(("d" "default" plain
          "%?"
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t)
 
         ("p" "project" plain
-         my/org-roam-para-template
+         ,my/org-roam-para-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project\n")
          :unnarrowed t)
 
         ("a" "area" plain
-         my/org-roam-para-template
+         ,my/org-roam-para-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Area\n")
          :unnarrowed t)
 
         ("b" "bibliography" plain
-         my/org-roam-biblio-template
+         ,my/org-roam-biblio-template
          :if-new (file+head
                   "%<%Y%m%d%H%M%S>-biblio-${slug}.org" "#+title: ${title}\n#+filetags: biblio\n")
          :unnarrowed t)))
@@ -472,8 +472,8 @@
    (my/org-roam-filter-by-tags-exclude-archive '("Project"))
    nil
    ;; If the selected node does not exist, override capture templates so that only the Project template is available
-   :templates '(("p" "project" plain
-                 my/org-roam-para-template
+   :templates `(("p" "project" plain
+                 ,my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -491,8 +491,8 @@
    nil
    (my/org-roam-filter-by-tag "Project")
    nil
-   :templates '(("p" "project" plain
-                 my/org-roam-para-template
+   :templates `(("p" "project" plain
+                 ,my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
@@ -522,8 +522,8 @@
    nil nil
    (my/org-roam-filter-by-tag "Area")
    nil
-   :templates '(("a" "area" plain
-                 my/org-roam-para-template
+   :templates `(("a" "area" plain
+                 ,my/org-roam-para-template
                  :if-new (file+head
                           "%<%Y%m%d%H%M%S>-${slug}.org"
                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Area")
